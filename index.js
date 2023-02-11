@@ -12,16 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const moment_1 = __importDefault(require("moment"));
 const fs_1 = __importDefault(require("fs"));
 const https_1 = __importDefault(require("https"));
+const utils_1 = require("./utils");
+const moment_1 = __importDefault(require("moment"));
+const decompress_1 = __importDefault(require("decompress"));
 const SYMBOL = '1000LUNCUSDT';
 const TIME = '1m';
-const DATE = '2023-02-03';
-const END_DATE = '2023-02-05';
+const START_DATE = '2022-09-09';
+const END_DATE = '2022-12-31';
 const getNames = (symbol, time, date) => {
-    const path = `https://data.binance.vision/data/futures/um/daily/klines/${symbol}/${time}/${symbol}-${time}-${date}.zip`;
-    const fileName = `./datas/${symbol}/${symbol}_${time}_${date}.zip`;
+    const yyyyMMdd = date.format('YYYY-MM-DD');
+    const path = `https://data.binance.vision/data/futures/um/daily/klines/${symbol}/${time}/${symbol}-${time}-${yyyyMMdd}.zip`;
+    const fileName = `./datas/${symbol}/${symbol}_${time}_${yyyyMMdd}.zip`;
     return { path, fileName };
 };
 const download = (symbol, time, date) => __awaiter(void 0, void 0, void 0, function* () {
@@ -29,17 +32,30 @@ const download = (symbol, time, date) => __awaiter(void 0, void 0, void 0, funct
     if (!fs_1.default.existsSync(dir)) {
         fs_1.default.mkdirSync(dir);
     }
-    const { path, fileName } = getNames(symbol, '1m', '2023-02-05');
-    const file = fs_1.default.createWriteStream(fileName);
-    const request = https_1.default.get(path, (result) => {
-        result.pipe(file);
-        file.on('finish', () => {
-            file.close();
-            console.log("Download Completed for", symbol, time, date);
+    const { path, fileName } = getNames(symbol, time, date);
+    return new Promise(resolve => {
+        const file = fs_1.default.createWriteStream(fileName);
+        https_1.default.get(path, (result) => {
+            result.pipe(file);
+            file.on('finish', () => {
+                file.close();
+                console.log("Download Completed for", symbol, time, date);
+                resolve();
+            });
         });
+    }).then(() => {
+        return (0, decompress_1.default)(fileName, dir);
+    }).then(() => {
+        fs_1.default.rmSync(fileName);
     });
 });
-const downloadAll = (symbol, time, start, end) => {
-};
-// download(SYMBOL, TIME, DATE)
-console.log("duration", moment_1.default.duration('2022-01-01', '2022-01-03'));
+const downloadAll = (symbol, time, start, end, unit) => __awaiter(void 0, void 0, void 0, function* () {
+    const diff = (0, utils_1.getDiff)(start, end, unit);
+    let cursor = (0, moment_1.default)(start);
+    for (let i = 0; i <= diff; i++) {
+        yield download(symbol, time, cursor);
+        cursor = cursor.add(1, unit);
+    }
+    console.log("Download All Completed");
+});
+// downloadAll(SYMBOL, TIME, START_DATE, END_DATE, DiffUnit.DAY)

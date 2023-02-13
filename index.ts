@@ -6,7 +6,7 @@ import moment, {Moment} from "moment";
 import decompress from "decompress";
 
 const SYMBOL = '1000LUNCUSDT';
-const TIME = '1m';
+const TIME = '15m';
 const START_DATE = '2022-09-09'
 const END_DATE = '2022-12-31'
 
@@ -53,4 +53,4 @@ const downloadAll = async (symbol: string, time: CandleTime, start: string, end:
   console.log("Download All Completed")
 }
 
-// downloadAll(SYMBOL, TIME, START_DATE, END_DATE, DiffUnit.DAY)
+downloadAll(SYMBOL, TIME, START_DATE, END_DATE, DiffUnit.DAY)

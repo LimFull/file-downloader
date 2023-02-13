@@ -14,11 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const https_1 = __importDefault(require("https"));
+const types_1 = require("./types");
 const utils_1 = require("./utils");
 const moment_1 = __importDefault(require("moment"));
 const decompress_1 = __importDefault(require("decompress"));
 const SYMBOL = '1000LUNCUSDT';
-const TIME = '1m';
+const TIME = '15m';
 const START_DATE = '2022-09-09';
 const END_DATE = '2022-12-31';
 const getNames = (symbol, time, date) => {
@@ -58,4 +59,4 @@ const downloadAll = (symbol, time, start, end, unit) => __awaiter(void 0, void 0
     }
     console.log("Download All Completed");
 });
-// downloadAll(SYMBOL, TIME, START_DATE, END_DATE, DiffUnit.DAY)
+downloadAll(SYMBOL, TIME, START_DATE, END_DATE, types_1.DiffUnit.DAY);

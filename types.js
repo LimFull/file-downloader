@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DiffUnit = void 0;
+exports.ChartIndex = exports.DiffUnit = void 0;
 var DiffUnit;
 (function (DiffUnit) {
     DiffUnit["SECOND"] = "second";
@@ -9,3 +9,10 @@ var DiffUnit;
     DiffUnit["DAY"] = "day";
     DiffUnit["MONTH"] = "month";
 })(DiffUnit = exports.DiffUnit || (exports.DiffUnit = {}));
+var ChartIndex;
+(function (ChartIndex) {
+    ChartIndex[ChartIndex["HIGH"] = 2] = "HIGH";
+    ChartIndex[ChartIndex["LOW"] = 3] = "LOW";
+    ChartIndex[ChartIndex["CLOSE"] = 4] = "CLOSE";
+    ChartIndex[ChartIndex["VOLUME"] = 5] = "VOLUME";
+})(ChartIndex = exports.ChartIndex || (exports.ChartIndex = {}));

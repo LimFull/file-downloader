@@ -53,32 +53,32 @@ const makeTextbook = (symbol, date) => __awaiter(void 0, void 0, void 0, functio
     const rows = csv.split('\n');
     const length = rows.length;
     console.log("length", length);
-    const closeChangeArray = (0, indicators_1.changePercent)(rows, types_1.ChartIndex.CLOSE);
-    const volumeChangeArray = (0, indicators_1.changePercent)(rows, types_1.ChartIndex.VOLUME);
-    const ema5array = (0, indicators_1.calculateEMA)(rows, 5);
-    const ema10array = (0, indicators_1.calculateEMA)(rows, 10);
-    const ema20array = (0, indicators_1.calculateEMA)(rows, 20);
-    const ema60array = (0, indicators_1.calculateEMA)(rows, 60);
-    const ema120array = (0, indicators_1.calculateEMA)(rows, 120);
-    const sma5array = (0, indicators_1.calculateSMA)(rows, 5);
-    const sma10array = (0, indicators_1.calculateSMA)(rows, 10);
-    const sma20array = (0, indicators_1.calculateSMA)(rows, 20);
-    const sma60array = (0, indicators_1.calculateSMA)(rows, 60);
-    const sma120array = (0, indicators_1.calculateSMA)(rows, 120);
-    const { macdData, signalData, histogramData } = (0, indicators_1.calculateMACD)(rows, 5, 12);
-    const rsi14array = (0, indicators_1.calculateRSI)(rows, 5);
-    const stocahstic5array = (0, indicators_1.stochasticOscillator)(rows, 5, 5, 5);
-    const bollinger10 = (0, indicators_1.bollingerBands)(rows, 10);
-    const ema5VolumeArray = (0, indicators_1.calculateEMAVolume)(rows, 5);
-    const ema10VolumeArray = (0, indicators_1.calculateEMAVolume)(rows, 10);
-    const ema20VolumeArray = (0, indicators_1.calculateEMAVolume)(rows, 20);
-    const ema60VolumeArray = (0, indicators_1.calculateEMAVolume)(rows, 60);
-    const ema120VolumeArray = (0, indicators_1.calculateEMAVolume)(rows, 120);
-    const sma5VolumeArray = (0, indicators_1.calculateSMAVolume)(rows, 5);
-    const sma10VolumeArray = (0, indicators_1.calculateSMAVolume)(rows, 10);
-    const sma20VolumeArray = (0, indicators_1.calculateSMAVolume)(rows, 20);
-    const sma60VolumeArray = (0, indicators_1.calculateSMAVolume)(rows, 60);
-    const sma120VolumeArray = (0, indicators_1.calculateSMAVolume)(rows, 120);
+    const closeChangeArray = (0, indicators_1.changeAbs)(rows, types_1.ChartIndex.CLOSE);
+    const volumeChangeArray = (0, indicators_1.changeAbs)(rows, types_1.ChartIndex.VOLUME);
+    const ema5array = (0, indicators_1.calculateEMAAbs)(rows, 5, types_1.ChartIndex.CLOSE);
+    const ema10array = (0, indicators_1.calculateEMAAbs)(rows, 10, types_1.ChartIndex.CLOSE);
+    const ema20array = (0, indicators_1.calculateEMAAbs)(rows, 20, types_1.ChartIndex.CLOSE);
+    const ema60array = (0, indicators_1.calculateEMAAbs)(rows, 60, types_1.ChartIndex.CLOSE);
+    const ema120array = (0, indicators_1.calculateEMAAbs)(rows, 120, types_1.ChartIndex.CLOSE);
+    const sma5array = (0, indicators_1.calculateSMAAbs)(rows, 5, types_1.ChartIndex.CLOSE);
+    const sma10array = (0, indicators_1.calculateSMAAbs)(rows, 10, types_1.ChartIndex.CLOSE);
+    const sma20array = (0, indicators_1.calculateSMAAbs)(rows, 20, types_1.ChartIndex.CLOSE);
+    const sma60array = (0, indicators_1.calculateSMAAbs)(rows, 60, types_1.ChartIndex.CLOSE);
+    const sma120array = (0, indicators_1.calculateSMAAbs)(rows, 120, types_1.ChartIndex.CLOSE);
+    const { macdData, signalData, histogramData } = (0, indicators_1.calculateMACDAbs)(rows, 5, 12);
+    const rsi14array = (0, indicators_1.calculateRSI)(rows, 14);
+    const stocahstic5array = (0, indicators_1.stochasticOscillator)(rows, 14, 3, 3);
+    const bollinger10 = (0, indicators_1.bollingerBands)(rows, 20);
+    const ema5VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 5, types_1.ChartIndex.VOLUME);
+    const ema10VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 10, types_1.ChartIndex.VOLUME);
+    const ema20VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 20, types_1.ChartIndex.VOLUME);
+    const ema60VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 60, types_1.ChartIndex.VOLUME);
+    const ema120VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 120, types_1.ChartIndex.VOLUME);
+    const sma5VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 5, types_1.ChartIndex.VOLUME);
+    const sma10VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 10, types_1.ChartIndex.VOLUME);
+    const sma20VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 20, types_1.ChartIndex.VOLUME);
+    const sma60VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 60, types_1.ChartIndex.VOLUME);
+    const sma120VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 120, types_1.ChartIndex.VOLUME);
     for (let i = 0; i < length; i++) {
         const ema5 = i < 4 ? 'NaN' : ema5array[i - 4];
         const ema10 = i < 9 ? 'NaN' : ema10array[i - 9];
@@ -100,7 +100,7 @@ const makeTextbook = (symbol, date) => __awaiter(void 0, void 0, void 0, functio
         const sma20Volume = i < 19 ? 'NaN' : sma20VolumeArray[i - 19];
         const sma60Volume = i < 59 ? 'NaN' : sma60VolumeArray[i - 59];
         const sma120Volume = i < 119 ? 'NaN' : sma120VolumeArray[i - 119];
-        rows[i] = rows[i] + ',' + closeChangeArray[i] + ',' + volumeChangeArray[i] + ',' + ema5 + ',' + ema10 + ',' + ema20 + ',' + ema60 + ',' + ema120 + ',' + sma5 + ',' + sma10 + ',' + sma20 + ',' + sma60 + ',' + sma120 + ',' + macdData[i] + ',' + signalData[i] + ',' + rsi14array[i] + ',' + stocahstic5array[i].k + ',' + stocahstic5array[i].d + ',' + stocahstic5array[i].kperd + ',' + bollinger10.upperBands[i] + ',' + bollinger10.lowerBands[i] + ',' + ema5Volume + ',' + ema10Volume + ',' + ema20Volume + ',' + ema60Volume + ',' + ema120Volume + ',' + sma5Volume + ',' + sma10Volume + ',' + sma20Volume + ',' + sma60Volume + ',' + sma120Volume;
+        rows[i] = rows[i] + ',' + closeChangeArray[i] + ',' + volumeChangeArray[i] + ',' + ema5 + ',' + ema10 + ',' + ema20 + ',' + ema60 + ',' + ema120 + ',' + sma5 + ',' + sma10 + ',' + sma20 + ',' + sma60 + ',' + sma120 + ',' + macdData[i] + ',' + signalData[i] + ',' + rsi14array[i] + ',' + stocahstic5array[i].k + ',' + stocahstic5array[i].d + ',' + bollinger10.upperBands[i] + ',' + bollinger10.lowerBands[i] + ',' + ema5Volume + ',' + ema10Volume + ',' + ema20Volume + ',' + ema60Volume + ',' + ema120Volume + ',' + sma5Volume + ',' + sma10Volume + ',' + sma20Volume + ',' + sma60Volume + ',' + sma120Volume;
     }
     rows.forEach((v, i) => {
         // if (i < 120) {
@@ -109,17 +109,10 @@ const makeTextbook = (symbol, date) => __awaiter(void 0, void 0, void 0, functio
         // if (i > 200) {
         //     return
         // }
-        // if (i < 200) {
-        //     return;
-        // }
-        //
-        // if (i > 1860) {
-        //     return
-        // }
-        if (i < 1860) {
+        if (i < 200) {
             return;
         }
-        if (i > 3000) {
+        if (i > 1640) {
             return;
         }
         if (i === rows.length - 1) {

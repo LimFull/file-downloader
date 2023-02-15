@@ -54,7 +54,7 @@ const makeTextbook = (symbol, date) => __awaiter(void 0, void 0, void 0, functio
     const length = rows.length;
     console.log("length", length);
     const closeChangeArray = (0, indicators_1.changeAbs)(rows, types_1.ChartIndex.CLOSE);
-    const volumeChangeArray = (0, indicators_1.changeAbs)(rows, types_1.ChartIndex.VOLUME);
+    const volumeChangeArray = (0, indicators_1.changeAbs)(rows, types_1.ChartIndex.QUOTE_VOLUME);
     const ema5array = (0, indicators_1.calculateEMAAbs)(rows, 5, types_1.ChartIndex.CLOSE);
     const ema10array = (0, indicators_1.calculateEMAAbs)(rows, 10, types_1.ChartIndex.CLOSE);
     const ema20array = (0, indicators_1.calculateEMAAbs)(rows, 20, types_1.ChartIndex.CLOSE);
@@ -65,20 +65,20 @@ const makeTextbook = (symbol, date) => __awaiter(void 0, void 0, void 0, functio
     const sma20array = (0, indicators_1.calculateSMAAbs)(rows, 20, types_1.ChartIndex.CLOSE);
     const sma60array = (0, indicators_1.calculateSMAAbs)(rows, 60, types_1.ChartIndex.CLOSE);
     const sma120array = (0, indicators_1.calculateSMAAbs)(rows, 120, types_1.ChartIndex.CLOSE);
-    const { macdData, signalData, histogramData } = (0, indicators_1.calculateMACDAbs)(rows, 5, 12);
-    const rsi14array = (0, indicators_1.calculateRSI)(rows, 14);
-    const stocahstic5array = (0, indicators_1.stochasticOscillator)(rows, 14, 3, 3);
+    const { macdData, signalData, histogramData } = (0, indicators_1.calculateMACDAbs)(rows, 3, 10, 16);
+    const rsi14array = (0, indicators_1.calculateRSI)(rows, 2);
+    const stocahstic5array = (0, indicators_1.stochasticOscillator)(rows, 14, 5, 3);
     const bollinger10 = (0, indicators_1.bollingerBands)(rows, 20);
-    const ema5VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 5, types_1.ChartIndex.VOLUME);
-    const ema10VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 10, types_1.ChartIndex.VOLUME);
-    const ema20VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 20, types_1.ChartIndex.VOLUME);
-    const ema60VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 60, types_1.ChartIndex.VOLUME);
-    const ema120VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 120, types_1.ChartIndex.VOLUME);
-    const sma5VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 5, types_1.ChartIndex.VOLUME);
-    const sma10VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 10, types_1.ChartIndex.VOLUME);
-    const sma20VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 20, types_1.ChartIndex.VOLUME);
-    const sma60VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 60, types_1.ChartIndex.VOLUME);
-    const sma120VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 120, types_1.ChartIndex.VOLUME);
+    const ema5VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 5, types_1.ChartIndex.QUOTE_VOLUME);
+    const ema10VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 10, types_1.ChartIndex.QUOTE_VOLUME);
+    const ema20VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 20, types_1.ChartIndex.QUOTE_VOLUME);
+    const ema60VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 60, types_1.ChartIndex.QUOTE_VOLUME);
+    const ema120VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 120, types_1.ChartIndex.QUOTE_VOLUME);
+    const sma5VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 5, types_1.ChartIndex.QUOTE_VOLUME);
+    const sma10VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 10, types_1.ChartIndex.QUOTE_VOLUME);
+    const sma20VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 20, types_1.ChartIndex.QUOTE_VOLUME);
+    const sma60VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 60, types_1.ChartIndex.QUOTE_VOLUME);
+    const sma120VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 120, types_1.ChartIndex.QUOTE_VOLUME);
     for (let i = 0; i < length; i++) {
         const ema5 = i < 4 ? 'NaN' : ema5array[i - 4];
         const ema10 = i < 9 ? 'NaN' : ema10array[i - 9];
@@ -130,7 +130,7 @@ const makeTextbookV2 = (symbol, date) => __awaiter(void 0, void 0, void 0, funct
     const length = rows.length;
     console.log("length", length);
     const closeChangeArray = (0, indicators_1.changeAbs)(rows, types_1.ChartIndex.CLOSE);
-    const volumeChangeArray = (0, indicators_1.changeAbs)(rows, types_1.ChartIndex.VOLUME);
+    const volumeChangeArray = (0, indicators_1.changeAbs)(rows, types_1.ChartIndex.QUOTE_VOLUME);
     const ema5array = (0, indicators_1.calculateEMAAbs)(rows, 5, types_1.ChartIndex.CLOSE);
     const ema10array = (0, indicators_1.calculateEMAAbs)(rows, 10, types_1.ChartIndex.CLOSE);
     const ema20array = (0, indicators_1.calculateEMAAbs)(rows, 20, types_1.ChartIndex.CLOSE);
@@ -141,20 +141,20 @@ const makeTextbookV2 = (symbol, date) => __awaiter(void 0, void 0, void 0, funct
     const sma20array = (0, indicators_1.calculateSMAAbs)(rows, 20, types_1.ChartIndex.CLOSE);
     const sma60array = (0, indicators_1.calculateSMAAbs)(rows, 60, types_1.ChartIndex.CLOSE);
     const sma120array = (0, indicators_1.calculateSMAAbs)(rows, 120, types_1.ChartIndex.CLOSE);
-    const { macdData, signalData, histogramData } = (0, indicators_1.calculateMACDAbs)(rows, 5, 12);
+    const { macdData, signalData, histogramData } = (0, indicators_1.calculateMACDAbs)(rows, 5, 12, 24);
     const rsi14array = (0, indicators_1.calculateRSI)(rows, 14);
     const stocahstic5array = (0, indicators_1.stochasticOscillator)(rows, 14, 3, 3);
     const bollinger10 = (0, indicators_1.bollingerBands)(rows, 20);
-    const ema5VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 5, types_1.ChartIndex.VOLUME);
-    const ema10VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 10, types_1.ChartIndex.VOLUME);
-    const ema20VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 20, types_1.ChartIndex.VOLUME);
-    const ema60VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 60, types_1.ChartIndex.VOLUME);
-    const ema120VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 120, types_1.ChartIndex.VOLUME);
-    const sma5VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 5, types_1.ChartIndex.VOLUME);
-    const sma10VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 10, types_1.ChartIndex.VOLUME);
-    const sma20VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 20, types_1.ChartIndex.VOLUME);
-    const sma60VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 60, types_1.ChartIndex.VOLUME);
-    const sma120VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 120, types_1.ChartIndex.VOLUME);
+    const ema5VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 5, types_1.ChartIndex.QUOTE_VOLUME);
+    const ema10VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 10, types_1.ChartIndex.QUOTE_VOLUME);
+    const ema20VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 20, types_1.ChartIndex.QUOTE_VOLUME);
+    const ema60VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 60, types_1.ChartIndex.QUOTE_VOLUME);
+    const ema120VolumeArray = (0, indicators_1.calculateEMAAbs)(rows, 120, types_1.ChartIndex.QUOTE_VOLUME);
+    const sma5VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 5, types_1.ChartIndex.QUOTE_VOLUME);
+    const sma10VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 10, types_1.ChartIndex.QUOTE_VOLUME);
+    const sma20VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 20, types_1.ChartIndex.QUOTE_VOLUME);
+    const sma60VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 60, types_1.ChartIndex.QUOTE_VOLUME);
+    const sma120VolumeArray = (0, indicators_1.calculateSMAAbs)(rows, 120, types_1.ChartIndex.QUOTE_VOLUME);
     const ema5HighArray = (0, indicators_1.calculateEMAAbs)(rows, 5, types_1.ChartIndex.HIGH);
     const ema10HighArray = (0, indicators_1.calculateEMAAbs)(rows, 10, types_1.ChartIndex.HIGH);
     const ema20HighArray = (0, indicators_1.calculateEMAAbs)(rows, 20, types_1.ChartIndex.HIGH);
@@ -244,8 +244,8 @@ const makeTextbookV2 = (symbol, date) => __awaiter(void 0, void 0, void 0, funct
 });
 function joinAndMake(symbol, time, start, end) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield joinBook(symbol, time, start, end);
-        yield makeTextbookV2(symbol, (0, moment_1.default)('2022'));
+        // await joinBook(symbol, time, start, end)
+        yield makeTextbook(symbol, (0, moment_1.default)('2022'));
     });
 }
-joinAndMake('1000LUNCUSDT', '1m', (0, moment_1.default)('2022-09-09'), (0, moment_1.default)('2022-12-31'));
+joinAndMake('1000LUNCUSDT', '5m', (0, moment_1.default)('2022-09-09'), (0, moment_1.default)('2022-12-31'));

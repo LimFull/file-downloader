@@ -226,38 +226,38 @@ function calculateMACD(rows, fast, slow) {
     };
 }
 exports.calculateMACD = calculateMACD;
-function calculateMACDAbs(rows, fast, slow) {
+function calculateMACDAbs(rows, fast, slow, period) {
     const macdData = [];
     const signalData = [];
     const histogramData = [];
-    let ema12 = 0;
-    let ema26 = 0;
+    let fastEma = 0;
+    let slowEma = 0;
     let signal = 0;
     for (let i = 0; i < rows.length; i++) {
         const close = +rows[i].split(',')[types_1.ChartIndex.CLOSE];
         if (i === 0) {
-            ema12 = close;
-            ema26 = close;
+            fastEma = close;
+            slowEma = close;
         }
         else {
-            ema12 = Number(((close * (2 / (fast + 1))) + (ema12 * (1 - (2 / (fast + 1))))).toFixed(10));
-            ema26 = Number(((close * (2 / (slow + 1))) + (ema26 * (1 - (2 / (slow + 1))))).toFixed(10));
+            fastEma = Number(((close * (2 / (fast + 1))) + (fastEma * (1 - (2 / (fast + 1))))).toFixed(10));
+            slowEma = Number(((close * (2 / (slow + 1))) + (slowEma * (1 - (2 / (slow + 1))))).toFixed(10));
         }
-        const macd = Number((ema12 - ema26).toFixed(10));
+        const macd = Number((fastEma - slowEma).toFixed(10));
         macdData.push(macd);
-        if (i < 8) {
+        if (i < period - 1) {
             signalData.push('NaN');
             histogramData.push('NaN');
         }
         else {
-            if (i === 8) {
+            if (i === period - 1) {
                 signal = macd;
             }
             else {
-                signal = fixed((macd * (2 / (9 + 1))) + (signal * (1 - (2 / (9 + 1)))));
+                signal = fixed((macd * (2 / (period + 1))) + (signal * (1 - (2 / (period + 1)))));
             }
             signalData.push(signal);
-            histogramData.push(Number((macd - signal).toFixed(10)));
+            histogramData.push(fixed(macd - signal));
         }
     }
     return {

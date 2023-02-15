@@ -15,4 +15,5 @@ var ChartIndex;
     ChartIndex[ChartIndex["LOW"] = 3] = "LOW";
     ChartIndex[ChartIndex["CLOSE"] = 4] = "CLOSE";
     ChartIndex[ChartIndex["VOLUME"] = 5] = "VOLUME";
+    ChartIndex[ChartIndex["QUOTE_VOLUME"] = 7] = "QUOTE_VOLUME";
 })(ChartIndex = exports.ChartIndex || (exports.ChartIndex = {}));

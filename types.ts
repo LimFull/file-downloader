@@ -12,5 +12,6 @@ export enum ChartIndex {
   HIGH = 2,
   LOW = 3,
   CLOSE = 4,
-  VOLUME = 5
+  VOLUME = 5,
+  QUOTE_VOLUME = 7
 }
